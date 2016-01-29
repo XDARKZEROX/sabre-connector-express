@@ -1,5 +1,7 @@
+
 var express = require('express');
 var router = express.Router();
+var authConstants = require("../lib/AuthConstants");
 
 var fs = require('fs');
 
@@ -15,25 +17,18 @@ router.get('/', function(req, res, next) {
   soap.createClient(url, function(err, client) {
   	var sheader = {
                     "mes:MessageHeader" : {
-                    	/*From : {
-                    		PartyId: "999999"
+                    	From : {
+                    		PartyId: authConstants.FROM_PARTY_ID
                     	},
                     	To : {
-                    		PartyId: "123123"
+                    		PartyId: authConstants.TO_PARTY_ID
                     	},
                    		CPAId: "35VF",
-                   		ConversationId: "123456@webservices.sabre.com",
+                   		ConversationId: authConstants.CONVERSATION_ID,
                    		Service: "Service",
-                   		Action: "SessionCreateRQ"*/
+                   		Action: "SessionCreateRQ"
                    	},
                    	"sec:Security": {
-                   		/*UsernameToken: {
-                   			Username: "7971",
-                   			//Password: "WS032511",
-                   			Organization: "35VF",
-                   			Domain: "DEFAULT"
-						},
-						BinarySecurityToken: ""*/
                    	}
 				};
     	client.addSoapHeader(sheader);
