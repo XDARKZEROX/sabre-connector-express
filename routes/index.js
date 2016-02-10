@@ -11,11 +11,12 @@ router.get('/', function(req, res, next) {
   var url = 'http://www.webservicex.com/globalweather.asmx?WSDL';
   var args = {CityName: 'Lima', CountryName: 'PE' };
   soap.createClient(url, function(err, client) {
-	client.GetWeather(args, function(err, result) {
+  	client.GetWeather(args, function(err, result) {
 		parseString(result.GetWeatherResult, function (err, result) {
     		res.json(result);
 		});
 		});
+  	//res.send(client.lastRequest);
 	});
 });
 

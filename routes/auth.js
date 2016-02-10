@@ -16,28 +16,38 @@ router.get('/', function(req, res, next) {
   var args = { };
   soap.createClient(url, function(err, client) {
   	var sheader = {
-                    "mes:MessageHeader" : {
-                    	From : {
-                    		PartyId: authConstants.FROM_PARTY_ID
+                    "eb:MessageHeader" : {
+                    	"eb:From" : {
+                    		"eb:PartyId": authConstants.FROM_PARTY_ID
                     	},
-                    	To : {
-                    		PartyId: authConstants.TO_PARTY_ID
+                    	"eb:To" : {
+                    		"eb:PartyId": authConstants.TO_PARTY_ID
                     	},
-                   		CPAId: "35VF",
-                   		ConversationId: authConstants.CONVERSATION_ID,
-                   		Service: "Service",
-                   		Action: "SessionCreateRQ"
+                   		"eb:CPAId": "35VF",
+                   		"eb:ConversationId": authConstants.CONVERSATION_ID,
+                   		"eb:Service": "Service",
+                   		"eb:Action": "SessionCreateRQ"
                    	},
-                   	"sec:Security": {
+                   	"ns4:Security": {
+                   		"ns4:UsernameToken": {
+                   			"ns4:Username": "",
+                   			"ns4:Password": "",
+                   			"ns4:Organization": "",
+                   			"ns4:Domain": "DEFAULT"
+						          },
+						          "ns4:BinarySecurityToken": ""
                    	}
-				};
-    	client.addSoapHeader(sheader);
+			};
+				
+    	client.addSoapHeader(sheader, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
+
   		client.SessionCreateRQ(args, function(err, result) {
 			parseString(result.body, function (err, result) {
-    		//res.send(result);
+    	   //console.log(result);
+         res.send(result);
 			});
 		});
-		res.send(client.lastRequest);//console.log(client);
+		//res.send(client.lastRequest);//console.log(client);
 	});
 	
 });
