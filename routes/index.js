@@ -6,18 +6,20 @@ var fs = require('fs');
 var soap = require('soap');
 var parseString = require('xml2js').parseString;
 
+//Esto es una prueba de consumir la wsdl del clima
 router.get('/', function(req, res, next) {
-  //http://www.webservicex.com/globalweather.asmx?WSDL
   var url = 'http://www.webservicex.com/globalweather.asmx?WSDL';
   var args = {CityName: 'Lima', CountryName: 'PE' };
   soap.createClient(url, function(err, client) {
   	client.GetWeather(args, function(err, result) {
+		//imprimir la respuesta en xml
+		//res.send(result.GetWeatherResult);
 		parseString(result.GetWeatherResult, function (err, result) {
     		res.json(result);
 		});
-		});
-  	//res.send(client.lastRequest);
 	});
+  	//res.send(client.lastRequest);
+  });
 });
 
 module.exports = router;
