@@ -1,6 +1,6 @@
 {
   "name": "sabre-connector-express",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Conector de Sabre para la generación de PassengerNameRecords (PNR)",
   "private": true,
   "scripts": {
@@ -14,8 +14,9 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
-    "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
+    "soap": "0.15.0"
   },
   "keywords": [
     "soap"
