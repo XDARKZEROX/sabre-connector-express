@@ -14,6 +14,21 @@ var express = require('express'),
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+console.log(process.env.NODE_ENV);
+
+/*
+* process.env.NODE_ENV (NODE_ENV environment variable) or ÅgdevelopmentÅh if NODE_ENV is not set.
+*
+* */
+
+if (app.get('env') == 'development') {
+  console.log('vamos a obtener las variables de develop');
+}
+
+if (app.get('env') == 'production') {
+  console.log('vamos a obtener las variables de produccion');
+}
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
