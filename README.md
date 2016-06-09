@@ -1,13 +1,13 @@
 # Conector de Sabre utilizando NodeJS y el framework ExpressJS 4
 
-## Estructura del Proyecto
+## 1.Estructura del Proyecto
 
 En desarrollo.
 
-## Servicios de Sabre
+## 2.Servicios de Sabre
 ### SessionCreate:
 
-## Enviroments
+## 3.Enviroments
 El proyecto posee constantes que serán cargadas dependiendo del Enviroment ('developtment' o 'production').
 Por defecto el proyecto se inicia siempre en development mode.
 
