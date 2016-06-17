@@ -14,15 +14,13 @@ var express = require('express'),
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-console.log(process.env.NODE_ENV);
-
 /*
 * process.env.NODE_ENV (NODE_ENV environment variable) or ÅgdevelopmentÅh if NODE_ENV is not set.
 *
 * */
 
 if (app.get('env') == 'development') {
-  console.log('vamos a obtener las variables de develop');
+  console.log('vamos a obtener las variables de development');
 }
 
 if (app.get('env') == 'production') {
