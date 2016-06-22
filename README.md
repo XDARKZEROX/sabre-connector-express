@@ -1,4 +1,4 @@
-# SABRE-CONNECTOR-EXPRESS [version][project-version]
+# SABRE-CONNECTOR-EXPRESS [![version][project-version]][npm-url]
 > Un servicio REST construido en NodeJS y el framework ExpressJS4
 
 Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre (SOAP).
@@ -27,3 +27,4 @@ Para cambiar de entorno de desarrollo:
 ### SessionCreate:
 
 [project-version]: https://img.shields.io/badge/version-1.0.1-brightgreen.svg
+[npm-url]: https://npmjs.org/package/soap
