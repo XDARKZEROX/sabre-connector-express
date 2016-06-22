@@ -5,6 +5,9 @@ Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre
 
 - [Estructura del Proyecto:](#estructura-del-proyecto)
 - [Enviroments:](#enviroments)
+- [Servicios:](#servicios)
+    - [SessionCreate](#SessionCreate)
+    - [SessionClose](#SessionClose)
 
 ## Estructura del Proyecto
 
@@ -25,6 +28,16 @@ Para cambiar de entorno de desarrollo:
 
 ## Servicios
 ### SessionCreate:
+Este servicio permite la autenticación a Sabre para poder generar los demás servicios (búsqueda, reserva, cancelación, etc) retornando un token de sesión que se utilizará al momento de invocar a los demás servicios.
+
+En SOAP este servicio solo permite una cantidad de limitada de sesiones activas por lo que cada vez que se llame este servicio posteriormente deberá invocarse el servicio de `SessionClose` para liberar la sesión y evitar la sobrecarga. 
+
+### SessionClose:
+En desarrollo.
+
+### BargainFinderMax:
+En desarrollo.
+
 
 [project-version]: https://img.shields.io/badge/version-1.0.1-brightgreen.svg
 [npm-url]: https://npmjs.org/package/soap
