@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var coreConstants = require("../lib/CoreConstants");
 var officeIdConstants = require("../lib/OfficeIdConstants");
 var fs = require('fs');
 var sabreConnector = require("../connector/SabreConnector");
@@ -11,13 +10,22 @@ var parseString = require('xml2js').parseString;
 /* GET users listing. */
 router.get('/createSession', function(req, res, next) {
   //var args = {};
-  console.log("starts");
-  var officeId = officeIdConstants.PERU_PUBLIC;
-
-  sabreConnector.sessionCreate(officeId, function(result){
-    res.send("Your session Token is:" + result);
-
+  async.series([
+    function(callback) {
+      sabreConnector.sessionCreate(officeId, function(result){
+        console.log(result);
+        callback(result);
+      });
+    },
+    function(callback){
+      console.log(callback);
+    }
+  ],function (err, result){
+    console.log("complete");
   });
+
+
+
 
   /*
   async.series([
@@ -44,13 +52,6 @@ router.get('/createSession', function(req, res, next) {
 
 
 });
-
-function suma(numero_uno,numero_dos,callback){
-  setTimeout(function(){
-    var resultado = numero_uno + numero_dos;
-    callback(resultado);
-  }, 5000);
-}
 
 module.exports = router;
 
