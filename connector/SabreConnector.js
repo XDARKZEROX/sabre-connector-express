@@ -14,9 +14,9 @@ var async = require('async');
 var soap = require('soap');
 var wsdl = coreConstants.WSDL_SOURCE;
 var parseString = require('xml2js').parseString;
+var token = "";
 
 exports.sessionCreate = function (officeId, callback) {
-
     console.log("starts sessionCreate");
     var messageHeader = buildMessageHeader("SessionCreateRQ");
     var username = "";
@@ -53,16 +53,16 @@ exports.sessionCreate = function (officeId, callback) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCreateRQ("", function(err, result) {
             if (result.statusCode == 500) return callback(result.body);
-                    parseString(result.body, function (err, result) {
-                        callback(result["soap-env:Envelope"]["soap-env:Header"][0]
-                            ["wsse:Security"][0]["wsse:BinarySecurityToken"][0]["_"]);
+                 parseString(result.body, function (err, result) {
+                     token = result["soap-env:Envelope"]["soap-env:Header"][0]
+                         ["wsse:Security"][0]["wsse:BinarySecurityToken"][0]["_"];
+                     callback(token);
             });
         });
     });
 }
 
 function buildMessageHeader(serviceName, officeId){
-
     var cPaid = "";
     if(officeId === officeIdConstants.PERU_PRIVATE){
         cPaid = "35VF";
@@ -88,5 +88,11 @@ function buildMessageHeader(serviceName, officeId){
     }
     return messageHeader;
 }
+
+exports.sessionClose = function(){
+
+}
+
+
 
 //module.exports.sessionCreate = sessionCreate;
