@@ -1,4 +1,4 @@
-# Conector de Sabre utilizando NodeJS y el framework ExpressJS 4
+# Conector de Sabre utilizando NodeJS y el framework ExpressJS 4 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Gitter chat][gitter-image]][gitter-url]
 
 ## 1. Estructura del Proyecto
 
