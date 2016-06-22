@@ -1,4 +1,4 @@
-# SABRE-CONNECTOR-EXPRESS [![version][project-version]][npm-url]
+# Sabre Connector Express [![version][project-version]][npm-url]
 > Un servicio REST construido en NodeJS y el framework ExpressJS4
 
 Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre (SOAP).
