@@ -1,6 +1,11 @@
-# Conector de Sabre utilizando NodeJS y el framework ExpressJS 4 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Gitter chat][gitter-image]][gitter-url]
+# SABRE-CONNECTOR-EXPRESS
+> Un servicio REST construido en NodeJS y el framework ExpressJS4
 
-## 1. Estructura del Proyecto
+Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre (SOAP).
+
+- [Estructura del Proyecto:](#estructura-del-proyecto)
+
+## Estructura del Proyecto
 
 En desarrollo.
 
