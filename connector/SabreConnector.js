@@ -3,22 +3,26 @@ Esta clase se encargara de administrar los URI a los request
  */
 var express = require('express');
 var merge = require('merge'),original, cloned;
-var authConstants = require("../lib/AuthConstants");
-var authConstantsPE = require("../lib/AuthConstantsPE");
-var authConstantsUS = require("../lib/AuthConstantsUS");
-var coreConstants = require("../lib/CoreConstants");
-var officeIdConstants = require("../lib/OfficeIdConstants");
-var fs = require('fs');
-var async = require('async');
+    authConstants = require("../lib/AuthConstants"),
+    authConstantsPE = require("../lib/AuthConstantsPE"),
+    authConstantsUS = require("../lib/AuthConstantsUS"),
+    coreConstants = require("../lib/CoreConstants"),
+    officeIdConstants = require("../lib/OfficeIdConstants"),
+    fs = require('fs'),
+    async = require('async'),
+ //   logger = require('../config/logger');
 //No olvidar instalar estas dependencias
-var soap = require('soap');
-var wsdl = coreConstants.WSDL_SOURCE;
-var parseString = require('xml2js').parseString;
-var token = "";
+    soap = require('soap'),
+    parseString = require('xml2js').parseString;
+var securityHolder;
+var messageHeader;
+var logger = require('../config/logger');
 
 exports.sessionCreate = function (officeId, callback) {
     console.log("starts sessionCreate");
-    var messageHeader = buildMessageHeader("SessionCreateRQ");
+    logger.log('info','starts sessionCreate')
+
+    var cPaid = "";
     var username = "";
     var password = "";
     var organization = "";
@@ -26,14 +30,32 @@ exports.sessionCreate = function (officeId, callback) {
         username = authConstantsPE.USER;
         password = authConstantsPE.PASSWORD;
         organization = authConstantsPE.OFFICE_ID;
+        cPaid = "35VF";
     } else if(officeId === officeIdConstants.USA_PUBLIC){
         username = authConstantsUS.USER;
         password = authConstantsUS.PASSWORD;
         organization = authConstantsUS.OFFICE_ID;
+        cPaid = "QY4G";
     } else {
         username = authConstantsPE.USER;
         password = authConstantsPE.PASSWORD;
         organization = authConstantsPE.OFFICE_ID;
+        cPaid = "35VF";
+    }
+
+    messageHeader = {
+        "eb:MessageHeader": {
+            "eb:From": {
+                "eb:PartyId": authConstants.FROM_PARTY_ID
+            },
+            "eb:To": {
+                "eb:PartyId": authConstants.TO_PARTY_ID
+            },
+            "eb:CPAId": cPaid,
+            "eb:ConversationId": authConstants.CONVERSATION_ID,
+            "eb:Service": "Service",
+            "eb:Action": "SessionCreateRQ"
+        }
     }
 
     var security = {
@@ -48,51 +70,38 @@ exports.sessionCreate = function (officeId, callback) {
         }
     };
 
+    securityHolder=security;
     var header = merge(messageHeader,security);
-    soap.createClient(wsdl, function(err, client) {
+
+    soap.createClient(coreConstants.WSDL_SOURCE, function(err, client) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCreateRQ("", function(err, result) {
             if (result.statusCode == 500) return callback(result.body);
                  parseString(result.body, function (err, result) {
+                     logger.log('info',result);
                      token = result["soap-env:Envelope"]["soap-env:Header"][0]
                          ["wsse:Security"][0]["wsse:BinarySecurityToken"][0]["_"];
+                     securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
                      callback(token);
             });
         });
     });
 }
 
-function buildMessageHeader(serviceName, officeId){
-    var cPaid = "";
-    if(officeId === officeIdConstants.PERU_PRIVATE){
-        cPaid = "35VF";
-    } else if(officeId === officeIdConstants.USA_PUBLIC){
-        cPaid = "QY4G";
-    } else {
-        cPaid = "35VF";
-    }
+exports.sessionClose = function(callback){
 
-    var messageHeader = {
-        "eb:MessageHeader": {
-            "eb:From": {
-                "eb:PartyId": authConstants.FROM_PARTY_ID
-            },
-            "eb:To": {
-                "eb:PartyId": authConstants.TO_PARTY_ID
-            },
-            "eb:CPAId": cPaid,
-            "eb:ConversationId": authConstants.CONVERSATION_ID,
-            "eb:Service": "Service",
-            "eb:Action": serviceName
-        }
-    }
-    return messageHeader;
+    console.log("dentro de sesionClose");
+    securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
+    messageHeader["eb:MessageHeader"]["eb:Action"]= "SessionCloseRQ";
+    var header = merge(messageHeader,securityHolder);
+    soap.createClient(coreConstants.WSDL_SESSION_CLOSE, function(err, client) {
+        client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
+        client.SessionCloseRQ("", function(err, result) {
+            if (result.statusCode == 500) return callback(result.body);
+            parseString(result.body, function (err, result) {
+                callback(result);
+            });
+        });
+    });
 }
 
-exports.sessionClose = function(){
-
-}
-
-
-
-//module.exports.sessionCreate = sessionCreate;

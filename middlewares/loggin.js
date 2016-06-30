@@ -5,6 +5,7 @@ validacion de campos al momento de enviar los request al connector
 var app = express();
 //Libreria usada para loggin
 var morgan = require('morgan');
+var logger = require("../config/logger");
 
 app.use(function (req, res, next) {
 
