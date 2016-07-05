@@ -7,11 +7,10 @@ var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)({
             colorize: true,
-            json: false
+            json: true
         }),
         new (winston.transports.File) ({
-            filename: '../logs/development.log',
-            colorize: true,
+            filename: './logs/development.log',
             json: true
         })
     ]

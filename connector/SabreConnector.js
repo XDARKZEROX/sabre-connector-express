@@ -10,16 +10,12 @@ var merge = require('merge'),original, cloned;
     officeIdConstants = require("../lib/OfficeIdConstants"),
     fs = require('fs'),
     async = require('async'),
- //   logger = require('../config/logger');
-//No olvidar instalar estas dependencias
     soap = require('soap'),
     parseString = require('xml2js').parseString;
 var securityHolder;
 var messageHeader;
 var logger = require('../config/logger');
-
 exports.sessionCreate = function (officeId, callback) {
-    console.log("starts sessionCreate");
     logger.log('info','starts sessionCreate')
 
     var cPaid = "";
@@ -76,9 +72,9 @@ exports.sessionCreate = function (officeId, callback) {
     soap.createClient(coreConstants.WSDL_SOURCE, function(err, client) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCreateRQ("", function(err, result) {
+            logger.info(result.body);
             if (result.statusCode == 500) return callback(result.body);
-                 parseString(result.body, function (err, result) {
-                     logger.log('info',result);
+            parseString(result.body, function (err, result) {
                      token = result["soap-env:Envelope"]["soap-env:Header"][0]
                          ["wsse:Security"][0]["wsse:BinarySecurityToken"][0]["_"];
                      securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
@@ -89,18 +85,17 @@ exports.sessionCreate = function (officeId, callback) {
 }
 
 exports.sessionClose = function(callback){
-
-    console.log("dentro de sesionClose");
     securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
     messageHeader["eb:MessageHeader"]["eb:Action"]= "SessionCloseRQ";
     var header = merge(messageHeader,securityHolder);
     soap.createClient(coreConstants.WSDL_SESSION_CLOSE, function(err, client) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCloseRQ("", function(err, result) {
+            logger.log('info',result.body);
             if (result.statusCode == 500) return callback(result.body);
             parseString(result.body, function (err, result) {
-                callback(result);
-            });
+                    callback(result);
+                });
         });
     });
 }

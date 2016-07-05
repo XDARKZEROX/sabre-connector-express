@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var officeIdConstants = require("../lib/OfficeIdConstants");
-var fs = require('fs');
-var sabreConnector = require("../connector/SabreConnector");
-var async = require('async');
-var parseString = require('xml2js').parseString;
-
+var express = require('express'),
+  router = express.Router(),
+  officeIdConstants = require("../lib/OfficeIdConstants"),
+  fs = require('fs'),
+  sabreConnector = require("../connector/SabreConnector"),
+  async = require('async'),
+  parseString = require('xml2js').parseString;
 
 /* GET users listing. */
 router.get('/createSession', function(req, res, next) {
@@ -41,17 +40,13 @@ router.get('/createSession', function(req, res, next) {
   */
 
 
-
-
-
-
-
-
   //rs.then(console.log, console.error);
  // console.log("end");
 
 
 });
+
+
 
 module.exports = router;
 

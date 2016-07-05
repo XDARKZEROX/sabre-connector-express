@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 	   client.GetWeather(args, function(err, result) {
 	   if (err) {
-	   console.log("error");
+		   console.log("error");
 	   }else{
 		   console.log("good");
 		}
