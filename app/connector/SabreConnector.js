@@ -3,20 +3,20 @@ Esta clase se encargara de administrar los URI a los request
  */
 var express = require('express');
 var merge = require('merge'),original, cloned;
-    authConstants = require("../lib/AuthConstants"),
-    authConstantsPE = require("../lib/AuthConstantsPE"),
-    authConstantsUS = require("../lib/AuthConstantsUS"),
-    coreConstants = require("../lib/CoreConstants"),
-    officeIdConstants = require("../lib/OfficeIdConstants"),
+    authConstants = require("../../lib/AuthConstants"),
+    authConstantsPE = require("../../lib/AuthConstantsPE"),
+    authConstantsUS = require("../../lib/AuthConstantsUS"),
+    coreConstants = require("../../lib/CoreConstants"),
+    officeIdConstants = require("../../lib/OfficeIdConstants"),
     fs = require('fs'),
     async = require('async'),
     soap = require('soap'),
     parseString = require('xml2js').parseString;
 var securityHolder;
 var messageHeader;
-var logger = require('../config/logger');
+var logger = require('../../config/logger');
 exports.sessionCreate = function (officeId, callback) {
-    logger.log('info','starts sessionCreate')
+   // logger.log('info','starts sessionCreate')
 
     var cPaid = "";
     var username = "";
@@ -69,13 +69,14 @@ exports.sessionCreate = function (officeId, callback) {
     securityHolder=security;
     var header = merge(messageHeader,security);
 
-    soap.createClient(coreConstants.WSDL_SOURCE, function(err, client) {
+    soap.createClient(coreConstants.WSDL_SESSION_CREATE, function(err, client) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCreateRQ("", function(err, result) {
-            logger.info(result.body);
             if (result.statusCode == 500) return callback(result.body);
+            logger.log('info',client.lastRequest);
+            logger.log('info',result.body);
             parseString(result.body, function (err, result) {
-                     token = result["soap-env:Envelope"]["soap-env:Header"][0]
+                    token = result["soap-env:Envelope"]["soap-env:Header"][0]
                          ["wsse:Security"][0]["wsse:BinarySecurityToken"][0]["_"];
                      securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
                      callback(token);
@@ -91,11 +92,12 @@ exports.sessionClose = function(callback){
     soap.createClient(coreConstants.WSDL_SESSION_CLOSE, function(err, client) {
         client.addSoapHeader(header, null, "ns4", "http://schemas.xmlsoap.org/ws/2002/12/secext");
         client.SessionCloseRQ("", function(err, result) {
-            logger.log('info',result.body);
             if (result.statusCode == 500) return callback(result.body);
+            logger.log('info',client.lastRequest);
+            logger.log('info',result.body);
             parseString(result.body, function (err, result) {
-                    callback(result);
-                });
+                callback(result);
+            });
         });
     });
 }

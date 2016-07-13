@@ -12,6 +12,7 @@ var logger = new (winston.Logger)({
         new (winston.transports.File) ({
             filename: './logs/development.log',
             json: true
+            //,eol: '\n'
         })
     ]
 });

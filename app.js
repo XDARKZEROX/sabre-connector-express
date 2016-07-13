@@ -7,6 +7,7 @@ var express = require('express'),
   soap = require('soap'),
   routes = require('./routes/index'),
   users = require('./routes/users'),
+  search = require('./routes/search'),
   auth = require('./routes/auth'),
   app = express();
 
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
-
+app.use('/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,8 +1,7 @@
 var express = require('express'),
   router = express.Router(),
-  officeIdConstants = require("../lib/OfficeIdConstants"),
   fs = require('fs'),
-  sabreConnector = require("../connector/SabreConnector"),
+  sabreConnector = require("../app/connector/SabreConnector"),
   async = require('async'),
   parseString = require('xml2js').parseString;
 
@@ -22,9 +21,6 @@ router.get('/createSession', function(req, res, next) {
   ],function (err, result){
     console.log("complete");
   });
-
-
-
 
   /*
   async.series([
