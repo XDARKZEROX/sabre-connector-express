@@ -3,6 +3,8 @@
 
 Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre (SOAP).
 
+- [Introducción](#introduccion)
+- [Caracteristicas:](#caracteristicas)
 - [Estructura del Proyecto:](#estructura-del-proyecto)
 - [Enviroments:](#enviroments)
 - [Servicios:](#servicios)
@@ -10,7 +12,18 @@ Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre
     - [SessionClose](#SessionClose)
     - [BargainFinderMax](#BargainFinderMax)
 
+## Introducción
+
+En desarrollo.
+
+## Características
+
+* Una API muy simple de manipular
+* Permite la opción de despleglarse como un servicio REST o SOAP (véase branch sabre-connector-rest)
+
 ## Estructura del Proyecto
+
+![Alt text](https://cloud.githubusercontent.com/assets/4942140/16822753/4c37e56e-4924-11e6-881e-33efbdb7d81e.png "Sabre Connector Express Structure")
 
 En desarrollo.
 
