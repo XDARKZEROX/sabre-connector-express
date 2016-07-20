@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    officeIdConstants = require("../../lib/OfficeIdConstants"),
+    officeIdConstants = require("../../config/constants/OfficeIdConstants"),
     fs = require('fs'),
     sabreConnector = require("../connector/SabreConnector"),
     async = require('async'),

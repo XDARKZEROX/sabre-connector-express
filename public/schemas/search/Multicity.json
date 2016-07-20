@@ -1,0 +1,31 @@
+{
+  "Flights": [
+	{
+	  "flight": {
+		"Segment": {
+		  "DepartureId": "LIM",
+		  "ArrivalId": "MIA",
+		  "DepartureDate": "2016-07-19"
+		}
+	  }
+	},
+	{
+	  "flight": {
+		"Segment": {
+		  "DepartureId": "MIA",
+		  "ArrivalId": "MAD",
+		  "DepartureDate": "2016-08-09"
+		}
+	  }
+	},
+	{
+	  "flight": {
+		"Segment": {
+		  "DepartureId": "MAD",
+		  "ArrivalId": "CUZ",
+		  "DepartureDate": "2016-08-09"
+		}
+	  }
+	}
+  ]
+}

@@ -1,6 +1,7 @@
 'use strict';
-var passenger = function(type){
-    this.type = type;
+
+var passenger = function(typePassenger){
+    this.typePassenger = typePassenger;
 }
 
 module.exports = passenger;

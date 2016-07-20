@@ -1,13 +1,13 @@
 /*
-Esta clase se encargara de administrar los URI a los request
+Esta clase se encargar? de administrar los URI a los request
  */
 var express = require('express');
 var merge = require('merge'),original, cloned;
-    authConstants = require("../../lib/AuthConstants"),
-    authConstantsPE = require("../../lib/AuthConstantsPE"),
-    authConstantsUS = require("../../lib/AuthConstantsUS"),
-    coreConstants = require("../../lib/CoreConstants"),
-    officeIdConstants = require("../../lib/OfficeIdConstants"),
+    authConstants = require("../../config/constants/AuthConstants"),
+    authConstantsPE = require("../../config/constants/AuthConstantsPE"),
+    authConstantsUS = require("../../config/constants/AuthConstantsUS"),
+    coreConstants = require("../../config/constants/CoreConstants"),
+    officeIdConstants = require("../../config/constants/OfficeIdConstants"),
     fs = require('fs'),
     async = require('async'),
     soap = require('soap'),

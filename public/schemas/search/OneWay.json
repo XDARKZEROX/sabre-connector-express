@@ -1,0 +1,13 @@
+{
+  "Flights": [
+	{
+	  "flight": {
+		"Segment": {
+		  "DepartureId": "LIM",
+		  "ArrivalId": "TPP",
+		  "DepartureDate": "2016-07-19"
+		}
+	  }
+	}
+  ]
+}
