@@ -1,4 +1,4 @@
-# Sabre Connector Express [![version][project-version]][npm-url]
+# Sabre Connector Express [![][project-version]][npm-url]
 > Un servicio REST construido en NodeJS y el framework ExpressJS4
 
 Un servicio REST que permite la búsqueda de vuelos utilizando el motor de Sabre (SOAP).
@@ -24,6 +24,15 @@ En desarrollo.
 ## Estructura del Proyecto
 
 ![Alt text](https://cloud.githubusercontent.com/assets/4942140/16822753/4c37e56e-4924-11e6-881e-33efbdb7d81e.png "Sabre Connector Express Structure")
+
+ - **app:** Contiene la estructura principal del proyecto basado en el modelo MVC.
+ - **bin:** Contiene el archivo de configurador del servidor.
+ - **config:** Archivos de configuracion para librerias.
+ - **lib:** Librerias adicionales que no vienen directamente del package manager.
+ - **logs:** (solo usar en Development) Carpeta que contiene los logs.
+ - **middlewares:** 
+ - **routes:** 
+ - **test:** Archivos de testing usando la libreria mocha.
 
 En desarrollo.
 
@@ -53,6 +62,19 @@ Este servicio debe ser ejecutado despues de llamar al servicio `SessionCreate` y
 
 ### BargainFinderMax:
 En desarrollo.
+
+## Información adicional:
+
+### Códigos de estados de los segmentos antes de reservar
+
+```
+HK = "Held Confirmed" (reservation but not ticketed)
+OK = "OK" (ticketed and confirmed)
+SS = "Seat Saved" (reservation with seat assignment)
+RQ = Waitlisted
+NN = "Need/Need" (seat requested)
+CV = "Checked In/Virtual" (checked in via internet)
+```
 
 [project-version]: https://img.shields.io/badge/version-1.0.1-brightgreen.svg
 [npm-url]: https://npmjs.org/package/soap
