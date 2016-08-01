@@ -102,3 +102,10 @@ exports.sessionClose = function(callback){
     });
 }
 
+exports.bargainFinderMax = function(callback){
+
+    securityHolder["ns4:Security"]["ns4:BinarySecurityToken"] = token;
+    messageHeader["eb:MessageHeader"]["eb:Action"]= "BargainFinderMaxRQ";
+    var header = merge(messageHeader,securityHolder);
+
+}

@@ -5,12 +5,11 @@ var fs = require('fs'),
     officeIdConstants = require('../config/constants/OfficeIdConstants'),
     searchConstants = require('../config/constants/SearchConstants'),
     http_mocks = require('node-mocks-http'),
-    searchController = require('../routes/search'),
+    searchController = require('../app/controller/search'),
     airAvail = require('../app/models/search/AirAvailRQ'),
     negotiation = require('../app/models/search/Negotiation'),
     util = require('../lib/helpers/Util'),
     passenger = require('../app/models/search/Passenger');
-var logger = require('../config/logger');
 
 //Este servicio emplear? Mocking para testear
 describe('Sabre Flight Search Testing', function() {
@@ -24,35 +23,32 @@ describe('Sabre Flight Search Testing', function() {
     before(function() {
         negotiationTest = new negotiation();
         airAvailRQ = new airAvail();
-        airAvailRQ.flights = util.readJSONFlights(searchConstants.ROUNDTRIP);
+
         var passenger1 = new passenger('ADT');
         passengers.push(passenger1);
-        airAvailRQ.passengers = passengers;
-        airAvailRQ.officeID = officeIdConstants.PERU_PUBLIC;
 
         fareTypes.push("ADT");
         negotiationTest.faretype = fareTypes;
+
+        airAvailRQ.flights = util.readJSONFlights(searchConstants.ROUNDTRIP);
+        airAvailRQ.passengers = passengers;
+        airAvailRQ.officeID = officeIdConstants.PERU_PUBLIC;
         airAvailRQ.negotiation = negotiationTest;
-
-      //  logger.info(airAvailRQ);
-
-        console.log(airAvailRQ);
-
     });
 
-    it('should search Flights with public fare', function(done) {
-
-        //logger.log('info', test);
-
-        /*var request  = http_mocks.createRequest({
+    it.skip('should search Flights with public fare', function(done) {
+        var request  = http_mocks.createRequest({
             method: 'POST',
-            url: '/search'
-        });*/
-        //var response = http_mocks.createResponse();
-        /*controller.handle(request, response);
-        //routeHandler(request, response);
-        console.log(response.getData());
-        */
+            url: '/search',
+            body: {
+                airAvailRQ : airAvailRQ
+            }
+        });
+
+        var response = http_mocks.createResponse();
+        searchController.searchFlights(request, response);
+        console.log(response._getData());
+
         done();
     });
 });

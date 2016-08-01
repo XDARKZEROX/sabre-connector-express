@@ -16,13 +16,14 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "merge": "1.2.0",
+    "mocha": "2.5.3",
     "morgan": "~1.7.0",
+    "node-mocks-http": "1.5.2",
+    "node-rest-client": "^2.0.1",
     "serve-favicon": "~2.3.0",
     "soap": "0.16.0",
-    "xml2js":"0.4.16",
-    "mocha": "2.5.3",
     "winston": "2.2.0",
-    "node-mocks-http" : "1.5.2"
+    "xml2js": "0.4.16"
   },
   "keywords": [
     "soap"

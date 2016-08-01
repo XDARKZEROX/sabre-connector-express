@@ -1,5 +1,4 @@
 'use strict';
-//var passenger = require('./Passenger');
 var airAvailRQ = function(flights, passengers, officeID, advancedSearch,
                           fareTypeSearch, negotiation, typeSearch){
 
@@ -12,9 +11,5 @@ var airAvailRQ = function(flights, passengers, officeID, advancedSearch,
     this.typeSearch = typeSearch;
 
 }
-/*
-airAvailRQ.prototype.test = function() {
-    console.log('Este es el officeID ' + this.officeID);
-};*/
 
 module.exports = airAvailRQ;

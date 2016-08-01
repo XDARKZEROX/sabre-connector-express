@@ -7,7 +7,14 @@ var express = require('express'),
     parseString = require('xml2js').parseString;
 
 exports.searchFlights = function(req, res) {
+    console.log('We have a request for %s', req.method, req.url);
 
-    res.send('here in controller');
+    var airAvailRS;
 
+
+
+
+
+    res.status(200).json(req.body);
+    res.end();
 };

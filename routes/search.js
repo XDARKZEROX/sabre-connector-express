@@ -10,8 +10,8 @@ var express = require('express'),
 router.post('/', searchController.searchFlights);
 
 router.post('/test', function(req, res, next) {
-
-    res.send('complete');
+    res.json("here");
+  //  res.send('complete');
     /*
     async.series([
         function(callback) {
