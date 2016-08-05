@@ -2,15 +2,18 @@
 var fs = require('fs'),
     http = require('http'),
     assert = require('assert'),
-    logger = require('../config/logger');
+    logger = require('../config/logger'),
+    auth = require('../lib/helpers/auth'),
+    officeIdConstants = require("../config/constants/OfficeIdConstants");
 
 describe('Client logging test', function() {
+    this.timeout(0);
+
     it.skip('should log in Console and File', function(done) {
         logger.log('info', 'Hello distributed log files!');
         logger.info('Hello again distributed logs');
 
         var xml = require('fs').readFileSync('./text.txt', 'utf8');
-//        console.log(xml);
         var os = require('os');
 
         var interfaces = os.networkInterfaces();
@@ -30,4 +33,12 @@ describe('Client logging test', function() {
         logger.info(xml);
         done();
     });
+
+    it.skip('should get Token Session with UTIL', function(done){
+        auth.getAuthString(officeIdConstants.PERU_PUBLIC, function(result){
+            console.log(result);
+            assert.notStrictEqual(result.token, null);
+            done();
+        });
+    })
 });

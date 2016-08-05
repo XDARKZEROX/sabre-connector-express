@@ -1,7 +1,6 @@
 var express = require('express'),
   router = express.Router(),
   fs = require('fs'),
-  sabreConnector = require("../app/connector/SabreConnector"),
   async = require('async'),
   parseString = require('xml2js').parseString;
 

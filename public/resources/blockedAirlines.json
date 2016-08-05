@@ -1,0 +1,16 @@
+{
+    "blocked_airlines": [
+        { "code" : "2K" },
+        { "code" : "G3" },
+        { "code" : "NK" },
+        { "code" : "RG" },
+        { "code" : "2I" },
+        { "code" : "9H" },
+        { "code" : "3M" },
+        { "code" : "JL" },
+        { "code" : "DL" },
+        { "code" : "H1" },
+        { "code" : "HR" },
+        { "code" : "W4" }
+    ]
+}

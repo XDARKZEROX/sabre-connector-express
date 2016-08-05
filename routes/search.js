@@ -1,7 +1,6 @@
 var express = require('express'),
     router = express.Router(),
     fs = require('fs'),
-    sabreConnector = require("../app/connector/SabreConnector"),
     async = require('async'),
     parseString = require('xml2js').parseString;
     searchController = require("../app/controller/search");
@@ -11,6 +10,8 @@ router.post('/', searchController.searchFlights);
 
 router.post('/test', function(req, res, next) {
     res.json("here");
+
+
   //  res.send('complete');
     /*
     async.series([
