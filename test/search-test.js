@@ -5,13 +5,13 @@ var fs = require('fs'),
     officeIdConstants = require('../config/constants/OfficeIdConstants'),
     searchConstants = require('../config/constants/SearchConstants'),
     http_mocks = require('node-mocks-http'),
-    searchController = require('../app/controller/search'),
+    search = require('../app/controller/search'),
     airAvail = require('../app/models/search/AirAvailRQ'),
     negotiation = require('../app/models/search/Negotiation'),
-    util = require('../lib/helpers/Util'),
+    util = require('../lib/helpers/util'),
     passenger = require('../app/models/search/Passenger');
 
-//Este servicio emplear? Mocking para testear
+//Este servicio utiliza Mocking para testear
 describe('Sabre Flight Search Testing', function() {
     //desahibilita el timeout por default que tiene el test (3 segundos)
     this.timeout(0);
@@ -36,7 +36,7 @@ describe('Sabre Flight Search Testing', function() {
         airAvailRQ.negotiation = negotiationTest;
     });
 
-    it.skip('should search Flights with public fare', function(done) {
+    it('should search Flights with public fare', function(done) {
         var request  = http_mocks.createRequest({
             method: 'POST',
             url: '/search',
@@ -46,9 +46,11 @@ describe('Sabre Flight Search Testing', function() {
         });
 
         var response = http_mocks.createResponse();
-        searchController.searchFlights(request, response);
-        console.log(response._getData());
+        search.searchFlights(request, function(response){
+            console.log('end');
+            done();
+        });
+        //console.log(response._getData());
 
-        done();
     });
 });
