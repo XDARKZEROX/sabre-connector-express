@@ -36,7 +36,7 @@ describe('Sabre Flight Search Testing', function() {
         airAvailRQ.negotiation = negotiationTest;
     });
 
-    it('should search Flights with public fare', function(done) {
+    it.skip('should search Flights with public fare', function(done) {
         var request  = http_mocks.createRequest({
             method: 'POST',
             url: '/search',

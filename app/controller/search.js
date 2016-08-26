@@ -34,12 +34,11 @@ module.exports = {
             //procedemos a armar el request y luego lo enviamos a Sabre
             function(callback){
                 searchBuilder.buildBargainFinderMax(airAvailRQ , blockedAirlines);
-
                 callback();
             }
         ],function(err) {
-            console.log('second');
-            console.log(sabre_session);
+            //console.log('second');
+            //console.log(sabre_session);
 
             //res.status(200).json(req.body);
             //res.end();

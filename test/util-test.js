@@ -4,12 +4,13 @@ var fs = require('fs'),
     assert = require('assert'),
     logger = require('../config/logger'),
     auth = require('../lib/helpers/auth'),
+    util = require('../lib/helpers/util'),
     officeIdConstants = require("../config/constants/OfficeIdConstants");
 
 describe('Client logging test', function() {
     this.timeout(0);
 
-    it.skip('should log in Console and File', function(done) {
+    it.skip('should log in Console and File', function (done) {
         logger.log('info', 'Hello distributed log files!');
         logger.info('Hello again distributed logs');
 
@@ -34,11 +35,15 @@ describe('Client logging test', function() {
         done();
     });
 
-    it.skip('should get Token Session with UTIL', function(done){
-        auth.getAuthString(officeIdConstants.PERU_PUBLIC, function(result){
+    it.skip('should get Token Session with UTIL', function (done) {
+        auth.getAuthString(officeIdConstants.PERU_PUBLIC, function (result) {
             console.log(result);
             assert.notStrictEqual(result.token, null);
             done();
         });
-    })
+    });
+
+    it('should convert DepartureDateTime for Search', function (done) {
+        console.log(util.convertTheInputDateForSeach(date));
+    });
 });
