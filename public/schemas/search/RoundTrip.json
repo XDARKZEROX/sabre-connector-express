@@ -1,22 +1,21 @@
 {
   "Flights": [
 	{
-	  "flight": {
-		"Segment": {
+	  "Segment": [
+		{
 		  "DepartureId": "LIM",
 		  "ArrivalId": "TPP",
 		  "DepartureDate": "2016-07-19"
-		}
-	  }
+	  	}
+	  ]
 	},
 	{
-	  "flight": {
-		"Segment": {
+	  "Segment": [{
 		  "DepartureId": "TPP",
 		  "ArrivalId": "LIM",
 		  "DepartureDate": "2016-08-09"
-		}
-	  }
+	   }
+	  ]
 	}
   ]
 }

@@ -4,12 +4,15 @@ var fs = require('fs'),
     searchRouter = require('../routes/search'),
     officeIdConstants = require('../config/constants/OfficeIdConstants'),
     searchConstants = require('../config/constants/SearchConstants'),
+    fareTypeSearchConstants = require('../config/constants/FareTypeForSearchConstants'),
     http_mocks = require('node-mocks-http'),
     search = require('../app/controller/search'),
     airAvail = require('../app/models/search/AirAvailRQ'),
     negotiation = require('../app/models/search/Negotiation'),
     util = require('../lib/helpers/util'),
     passenger = require('../app/models/search/Passenger');
+var logger = require('../config/logger');
+
 
 //Este servicio utiliza Mocking para testear
 describe('Sabre Flight Search Testing', function() {
@@ -27,6 +30,9 @@ describe('Sabre Flight Search Testing', function() {
         var passenger1 = new passenger('ADT');
         passengers.push(passenger1);
 
+        var passenger2 = new passenger('ADT');
+        passengers.push(passenger2);
+
         fareTypes.push("ADT");
         negotiationTest.faretype = fareTypes;
 
@@ -34,9 +40,12 @@ describe('Sabre Flight Search Testing', function() {
         airAvailRQ.passengers = passengers;
         airAvailRQ.officeID = officeIdConstants.PERU_PUBLIC;
         airAvailRQ.negotiation = negotiationTest;
+
     });
 
-    it.skip('should search Flights with public fare', function(done) {
+    it('should search Flights with public fare', function(done) {
+
+        airAvailRQ.fareTypeSearch = fareTypeSearchConstants.PUBLIC_SEARCH;
         var request  = http_mocks.createRequest({
             method: 'POST',
             url: '/search',

@@ -1,0 +1,3 @@
+exports.PUBLIC_SEARCH = "0";
+exports.PRIVATE_SEARCH = "1";
+exports.PUBLIC_AND_PRIVATE_SEARCH = "2";
