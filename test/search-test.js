@@ -30,7 +30,7 @@ describe('Sabre Flight Search Testing', function() {
         var passenger1 = new passenger('ADT');
         passengers.push(passenger1);
 
-        var passenger2 = new passenger('ADT');
+        var passenger2 = new passenger('INF');
         passengers.push(passenger2);
 
         fareTypes.push("ADT");
