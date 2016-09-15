@@ -6,7 +6,11 @@ var express = require('express'),
     searchController = require("../app/controller/search");
 
 /* GET users listing. */
-router.post('/', searchController.searchFlights);
+router.post('/', function(req, res, next){
+    searchController.searchFlights(req, res);
+
+});
+
 
 router.post('/test', function(req, res, next) {
     res.json("here");

@@ -54,6 +54,7 @@ describe('Sabre Flight Search Testing', function() {
             }
         });
 
+        logger.info('info', airAvailRQ);
         var response = http_mocks.createResponse();
         search.searchFlights(request, function(response){
             console.log('end');

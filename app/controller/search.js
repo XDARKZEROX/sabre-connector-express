@@ -37,29 +37,24 @@ module.exports = {
             //procedemos a armar el request y luego lo enviamos a Sabre
             function(callback){
                 var sabreReq = searchBuilder.buildBargainFinderMax(airAvailRQ , blockedAirlines);
-
-                request = {
+                    request = {
                     event : "bfm",
                     nextEvent : "end",
                     token : sabre_session,
                     service : "/v1.9.4/shop/flights?mode=live",
                     query: sabreReq
                 }
+                rest.post(request, function(result){
+                    res.send(result);
+                });
 
-                rest.post(request)
-
-                callback();
-            },
-            function(callback){
-
-                console.log("llamada al servicio web de Sabre")
             }
         ],function(err) {
             //console.log('second');
             //console.log(sabre_session);
 
-            //res.status(200).json(req.body);
-            //res.end();
+            res.status(200).json(req.body);
+            res.end();
         });
     }
 }
