@@ -60,7 +60,6 @@ describe('Sabre Flight Search Testing', function() {
             console.log('end');
             done();
         });
-        //console.log(response._getData());
 
     });
 });
